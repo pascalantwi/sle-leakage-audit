@@ -31,10 +31,11 @@ def bounds_table():
         r = R[y]; F = r["bounds_F"]; c5 = r["cv"]["I0"]["0.05"], r["cv"]["I1"]["0.05"]
         c10 = r["cv"]["I0"]["0.1"], r["cv"]["I1"]["0.1"]
         dec = "Cointegrated" if F > c5[1] else ("Inconclusive" if F > c5[0] else "No cointegration")
-        if F <= c5[1] and F > c10[1]: dec += " (cointegrated at 10\\%)"
+        if F <= c5[1] and F > c10[1]: dec = "Inconclusive$^{a}$"
+        if y == "POVH": dec = "Not valid$^{b}$"
         L.append(f"{lab} & {order_str(r)} & {F:.3f} & {r['k']} & {c5[0]:.3f} & {c5[1]:.3f} & {dec} \\\\")
     L += [r"\hline", r"\end{tabular}}",
-          r"\par\footnotesize Note: Case III (unrestricted intercept, no trend). Critical values simulated for the estimation sample ($n = 38$) and each model's lag structure (20,000 replications). $k$ = number of regressors.",
+          r"\par\footnotesize Note: Case III (unrestricted intercept, no trend). Critical values simulated for the estimation sample ($n = 38$) and each model's lag structure (20,000 replications). $k$ = number of regressors. $^{a}$Above the 10\\% upper bound. $^{b}$The F-statistic exceeds the upper bound, but the test is not valid because the interpolated poverty headcount behaves as an I(2) series (Section \\ref{sec:ur}).",
           r"\end{table}"]
     return "\n".join(L)
 

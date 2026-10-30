@@ -33,3 +33,37 @@ Changes made to `ELDER_JHON.zip`, saved as `ELDER_JHON_corrected.zip`. Analysis 
 
 - Data sources and units in Table 3.1 (Definition of Variables). In particular, check the exact immunization indicator (DPT or measles) and the base year of GDP per capita.
 - The Chapter 5 literature discussion was kept. Only the result statements were updated.
+
+## Round 2: interpolation and Ghana evidence (supervisor comments)
+
+### Interpolation
+
+Comparing `NEW DATA.xlsx` (raw) with `John Mphil N.xlsx` (final) shows which years were filled:
+
+| Variable | Observed | How the original file filled the gaps |
+|---|---|---|
+| GINI | 7 GLSS years (1987, 1988, 1991, 1998, 2005, 2012, 2016) | Linear interpolation, nearest value carried to the ends. Reproduces exactly; kept. |
+| POVH | the same 7 years | **Unknown method.** Values range 4.5–80.8% although all survey values are 25–64%. Replaced with linear interpolation. |
+| SSER | 32 years | Unknown (not linear or spline). Replaced with linear interpolation. |
+
+New Section 3.3.1 "Treatment of Missing Data" gives the formula, a worked example and Table 3.1 (observed and filled years). It also states the limitations.
+
+### Consequences
+
+- **Interpolated POVH is I(2):** its first difference is not stationary under ADF and PP (p = 0.21–0.63); the second difference is. The bounds test is therefore not valid for the poverty model, which is reported as indicative only.
+- **Education:** the main finding is stronger. DITA two years earlier gives +4.60 (p = 0.0015). The bounds test is inconclusive, the ECT is about 0, and the residuals are non-normal (JB p < 0.001).
+- **Poverty:** GEX −0.117 (p = 0.030) and DITA insignificant. The earlier "effect reversed next year" result came from the unknown fill and has been removed. The ECT is about 0 and the residuals are non-normal.
+- **Figures:** trend figures now mark observed and interpolated points; correlations, scatter plots and descriptive statistics are updated.
+
+### Ghana empirical evidence added (Section 3.7.2)
+
+Each was confirmed through search results (title, authors, venue). Full texts were not opened because the sandbox blocks those sites.
+
+- Adu, Alagidede, Osei & Asamoah (2023), *Cogent Economics & Finance* 11(1), 2166211. Nonlinear ARDL; tax systems, poverty and inequality; Ghana 1983–2016.
+- Ofori, Obeng & Armah (2018), *Cogent Economics & Finance* 6(1), 1537822. ARDL; exchange rate volatility and tax revenue in Ghana.
+- Boachie (2015), MPRA Paper 67201. ARDL bounds test; health and growth in Ghana, 1982–2012.
+- Atta-Ankomah, Lambon-Quayefio & Osei (2023), WIDER Working Paper 2023/91. Irregular GLSS-based inequality data for Ghana; supports the need to interpolate.
+
+### Bibliography error found
+
+The existing `adu2023tax` entry had a fabricated title, journal (*Journal of Economic Studies*), author initial and DOI. It is now corrected to the verified Cogent article. **Other `.bib` entries should be spot-checked.**
